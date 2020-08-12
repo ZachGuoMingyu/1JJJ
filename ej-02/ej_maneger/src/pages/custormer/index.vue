@@ -34,7 +34,7 @@
 
     <!-- 分页 -->
     <div class="custormer_page">
-      <el-pagination background @current-change="handleCurrentChange" :page-size="pageSize" layout="total,prev, pager, next" :total="total"></el-pagination>
+      <el-pagination background @current-change="handleCurrentChange" :page-size="pageSize" :current-page.sync="currentPage" layout="total,prev, pager, next" :total="total"></el-pagination>
     </div>
 
     <!-- 模态框 先找一个基础模态框 -->
@@ -80,7 +80,7 @@ export default {
       // 请输入状态
       input:'',
       // 默认页码
-      page: 0,
+      currentPage: 1,
       // 分页pageSize 每页显示10条数据
       pageSize:10,
       // 总页数 根据请求下来的数据再去动态设置
@@ -132,7 +132,7 @@ export default {
     // 获取全部顾客信息
     findAllCustormer(){
       let params = {
-        page: this.page,
+        page: this.currentPage - 1,
         pageSize: this.pageSize
       }
       this.toLoadCustormer(params).then(r => {
@@ -141,17 +141,17 @@ export default {
     },
 
     handleCurrentChange(val){ 
-      this.page = val - 1
+      this.page = val
       this.findAllCustormer()
     },
     
     // 根据状态查询数据
     toSearch(){
       // 首先配置参数 
-      // 查询之前 先给page置0 因为我们可能是在第二页或者其他页查询 这样可能会有问题
-      this.page = 0
+      // 查询之前 先给currentPage置1 因为我们可能是在第二页或者其他页查询 这样可能会有问题
+      this.currentPage = 1
       let params = {
-        page: this.page,
+        page: this.currentPage - 1,
         pageSize: this.pageSize,
         // 拿到输入框中的输入
         status: this.input
@@ -186,6 +186,13 @@ export default {
         // 先去配置删除方法
         this.deleteCustermer(id).then((res)=>{
           // 刷新数据 放在.then里的目的是 等数据删除完毕才会刷新 否则刷新先执行 删除后执行 数据显示会有问题
+          // 此时已经实现删除操作，所以total的值需要减1，Math.ceil是向上取整，保证始终大于等于1
+          const totalPage = Math.ceil((this.custormer.total - 1) / this.pageSize) // 总页数
+          //记录当前页码
+          //记住删除最后一条数据时当前码是最后一页
+          this.currentPage = this.currentPage > totalPage ? totalPage : this.currentPage
+          //实现跳转
+          this.currentPage = this.currentPage < 1 ? 1 : this.currentPage
           this.findAllCustormer()
         })
         this.$message({
