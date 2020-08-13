@@ -27,6 +27,9 @@
         <!-- 计算总价部分 稍后完善 -->
         <!-- 因为数据比较少 所有 arr 和 product大家可以自己选择 也可以选择去使用外卖那个接口 -->
         <!-- 为了处理总价 这里我们循环加上index -->
+
+
+        <!-- 自己加一个c.number 也就是每一个item新增一个number属性 这样就不会一个改变全部都变了 和 v-model 对应 -->
         <van-card v-for="(c, index) in arr" :key="c.id"
           :num="c.number"
           :price="c.price"
@@ -69,7 +72,6 @@ import {mapActions, mapState} from 'vuex'
       return {
         // 因为activeKey是控制默认显示在第几个的 所以我们要对它进行一个设置 去loadAllCategory方法中设置
         activeKey: 0,
-        value: 1,
         // 产品
         arr:[],
         // 每一件商品的价格数组
@@ -101,6 +103,7 @@ import {mapActions, mapState} from 'vuex'
       },
       // 根据id 配合查询所有产品接口 来进行筛选
       toLoadProduct(id){
+        // 先按到所有商品数据
         this.toLoadPc()
         // 我们传递过来的id就是栏目id
         // 拿到所有数据以后 我们可以根据栏目id进行一个过滤 categoryId
