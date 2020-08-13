@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 // 登录界面
 import Login from '../views/Login.vue'
-// 首页
-import Order from '../views/manager/order.vue'
 // 订单界面
+import Order from '../views/manager/order.vue'
+// 首页
 import Index from '../views/manager/index.vue'
 // 我的界面
 import User from '../views/manager/user.vue'
@@ -20,6 +20,12 @@ Vue.use(VueRouter)
     {
       path: '/',
       redirect: '/login'
+    },
+    // 登录
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/home',
@@ -48,13 +54,8 @@ Vue.use(VueRouter)
           component: Details
         },
       ]
-    },
-    // 登录
-    {
-      path:'/login',
-      name:'login',
-      component: Login
     }
+    
     // 配置完以后 我们去home页面中进行配置
   ]
 

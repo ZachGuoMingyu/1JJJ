@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <!-- 放在上面 因为我们的底部导航栏在下面 -->
     <router-view></router-view>
     <!-- 通过router-link来配置路由跳转 -->
     <!-- <div>

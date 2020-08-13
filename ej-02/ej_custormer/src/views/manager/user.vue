@@ -5,12 +5,15 @@
       <!-- 头像 -->
       <div class="header_top">
         <!-- 动态绑定src设置头像 -->
-        <img :src="infoAva" alt />
+        <img v-if="infoAva" :src="infoAva" alt />
+        <img v-else :src="userInfo.avatar" alt />
       </div>
       <!-- 设置用户名 -->
       <div class="header_bottom">
         你好
-        <span style="color:coral;">{{userName}}</span>
+        <span v-if="userName" style="color:coral;">{{userName}}</span>
+        <span v-else style="color:coral;">{{userInfo.name}}</span>
+
       </div>
     </div>
     <!-- 内容区域 -->

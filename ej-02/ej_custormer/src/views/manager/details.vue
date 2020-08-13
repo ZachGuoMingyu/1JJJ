@@ -21,7 +21,7 @@
       <van-col span="2"></van-col>
       <!-- 产品详情 -->
       <van-col span="18">
-        <!-- 去vue组件库中 业务组件 商品卡片 基础用法 -->
+        <!-- 去vue组件库中 业务组件 商品卡片 自定义内容 留下footer 不要 tags -->
         <!-- 处理完全部数据后 开始绑定所有数据 -->
         <!-- 但是我们发现value绑定有问题 是不是一一对应绑定就可以了 -->
         <!-- 计算总价部分 稍后完善 -->
@@ -119,7 +119,7 @@ import {mapActions, mapState} from 'vuex'
       change(number, price, index){
         // 通过索引来将每一件商品的价格存进total数组中 也就是我们点击的是哪个商品 我们是可以获取到其index的 当它的价格发生变化 我们就给它存到数组中 此时总价的索引便是商品的索引
         this.total[index] = Number(number * price)
-        // 没触发一次我们要置零 否则每一次都会累加 
+        // 每触发一次我们要置零 否则每一次都会累加 
         this.allTotal = 0
         // 计算总价
         this.total.forEach((item, index)=>{
