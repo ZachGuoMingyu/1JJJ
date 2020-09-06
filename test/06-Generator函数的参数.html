@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function * gen(arg) {
+      console.log(arg);
+      let one = yield 111
+      console.log('one', one);
+
+      let two = yield 222
+      console.log('two', two);
+
+      let three = yield 333
+      console.log('three', three);
+    }
+    let a = gen('AAA')
+    a.next()
+    // next 也可以传递参数 每次执行next()函数传递的参数 都会作为上一个yield的返回值
+    a.next('BBB')
+    a.next('CCC')
+    a.next('DDD')
+  </script>
+</body>
+</html>

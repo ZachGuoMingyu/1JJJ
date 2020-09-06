@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    // 创建一个promise对象 进行异步加载操作
+    let promise = new Promise(function (resolve, reject) {
+      // 使用获取全部栏目数据
+      $.ajax({
+        url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+        method: 'get',
+        success(res){
+          resolve(res)
+        },
+        error(err){
+          reject(err)
+        }
+      })
+    })
+    
+    promise.then(function (res) {
+      console.log('成功回调',res);
+    }).catch(function (err) {
+      console.log('失败回调',err);
+    })
+  </script>
+</body>
+</html>

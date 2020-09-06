@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function * gen() {
+    //   console.log('hello Generator');
+    // }
+    // console.log(gen().next());
+
+    function * gen() {
+      console.log(111);
+      yield '一直没有耳朵'
+      console.log(222);
+      yield '一直没有嘴巴'
+      console.log(333);
+      yield '真奇怪'
+      console.log(444);
+    }
+    let a = gen()
+    console.log(a.next());
+    console.log(a.next());
+    console.log(a.next());
+    console.log(a.next());
+    // 通过打印可知 生成器的代码执行 并不像之前的代码 自上而下一次执行 而是需要我们调用next() 一段一段的去执行
+    // for (const v of gen()) {
+    //   console.log(v);
+    // }
+  </script>
+</body>
+</html>

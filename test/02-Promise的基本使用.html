@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 使用Promise
+    // 使用Promise构造函数创建Promise对象
+    let promise = new Promise(function (resolve, reject) {
+      // resolve promise的状态是成功的 调用它 异步加载成功 通过resolve传递成功会滴啊
+      // reject promise状态是失败的 调用它 异步加载失败 通过reject传递失败回调
+      // 在这里 使用同步操作 来模拟 异步加载的成功回调和失败回调
+      if (3 < 5) {
+        resolve('成功的')
+      }else{  
+        reject('失败的')
+      }
+    })
+    // console.log(promise);
+
+    promise
+    // .then和.catch和success与error回调类似
+    // 回调函数，回调函数的参数为resolve函数传递过来的值
+    .then(function (res) {
+      console.log(res);
+    })
+    // 回调函数，回调函数的参数为reject函数传递过来的值
+    .catch(function (err) {
+      console.log(err);
+    })
+  </script>
+</body>
+</html>
