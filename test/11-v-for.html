@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 使用v-for进行数据渲染 -->
+    <ul>
+      <li v-for="item in movies">
+        {{item}}
+      </li>
+    </ul>
+    <div>
+      <div v-for="item in movies">
+        {{item}}
+      </div>
+    </div>
+
+    <!-- 索引 -->
+    <ul>
+      <li v-for="(item, index) in movies">
+        {{index + 1}}---{{item}}
+      </li>
+    </ul>
+
+    <!-- v-for 遍历对象 value key index 的顺序是固定的-->
+    <ul>
+      <li  v-for="(value, key, index) in obj">
+        {{index}}--{{key}}--{{value}}
+        {{key}}--{{value}}--{{index}}
+      </li>
+    </ul>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        movies: ['信条','八佰','盗梦空间','星际穿越'],
+        obj:{
+          id: 1,
+          name: 'zhangsan',
+          age: 18
+        }
+      },
+  })
+  </script>
+</body>
+</html>

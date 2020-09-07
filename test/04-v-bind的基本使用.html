@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 以前显示图片 -->
+    <!-- <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599490941135&di=1626c4bd475069e594b4af5c86f8ef0c&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn11%2F155%2Fw640h315%2F20180602%2F19cd-hcikcew6046320.jpg" alt=""> -->
+
+    <!-- 错误的做法 -->
+    <!-- <img src="imgSrc" alt=""> -->
+
+    <!-- 使用动态绑定属性显示图片 -->
+    <img v-bind:src="imgSrc" alt="">
+    <!-- 动态绑定的语法糖 -->
+    <img :src="imgSrc" alt="">
+
+    <!-- 使用动态绑定显示A标签 -->
+    <a v-bind:href="aHref">百度一下</a>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        imgSrc: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599490941135&di=1626c4bd475069e594b4af5c86f8ef0c&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn11%2F155%2Fw640h315%2F20180602%2F19cd-hcikcew6046320.jpg',
+        aHref: 'https://www.baidu.com' 
+      },
+  })
+  </script>
+</body>
+</html>

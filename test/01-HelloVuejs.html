@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 通过插值语法进行显示 -->
+    {{message}}
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // 编程范式：声明式编程
+    // 使用构造函数创建Vue的实例
+    let vm = new Vue({
+      // 挂载 将想要管理的节点挂载上
+      el: '#app',
+      // data用来保存数据 既可以保存本地的 也可以保存网络获取下来的数据
+      data:{
+        message: 'Hello Vue'
+      }
+    })
+
+    // 原生js 命令式编程
+    // 1.创建一个id为app的div
+    // 2.创建一个变量message
+    // 3.通过DOM获取到div
+    // 4.将message赋值给div显示
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active{
+      color: red;
+    }
+    .line{
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 用法一：直接通过[]绑定一个类
+    <h2 :class="[value]">Hello World</h2> -->
+    <h2 :class="[active]">{{message}}</h2>
+
+    <!-- 用法二：也可以传入多个值
+    <h2 :class=“[‘active’, 'line' ]">Hello World</h2> -->
+    <h2 :class="[active, line]">{{message}}</h2>
+
+    <!-- 用法三 和普通的类不会冲突 -->
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue',
+        active: 'active',
+        line: 'line'
+      },
+  })
+  </script>
+</body>
+</html>

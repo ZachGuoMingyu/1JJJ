@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 使用插值语法显示文本 -->
+    <h2>{{message}}</h2>
+
+    <!-- 原始的HTML -->
+    <h2 v-html="rawHtml"></h2>
+
+    <!-- 插值语法也可以使用表达式 -->
+    <h2>{{count * 2}}</h2>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello Vue',
+        rawHtml: '<button>我是一个按钮</button>',
+        count: 100
+      },
+  })
+  </script>
+</body>
+</html>
