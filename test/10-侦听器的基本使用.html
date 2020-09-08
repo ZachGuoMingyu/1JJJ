@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    名：<input type="text" v-model="firstName">
+    姓：<input type="text" v-model="lastName">
+    <h2>全名是:{{fullName}}</h2>
+    <h2>{{fullName2}}</h2>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'Lebron',
+        lastName: 'James',
+        fullName: 'Lebron James'
+      },
+      // 侦听器 
+      watch: {
+        // 侦听数据的变化 函数名要和data中定义的属性名保持一致
+        // 我们给其定义一个形参val 表示的是firstName当前更新后最新的值 只要数据发生变化 val就会跟着变化 就会得到最新的值
+        firstName(val){
+          console.log('数据更新', val);
+          this.fullName = val + ' ' + this.lastName
+        },
+        lastName(val){
+          this.fullName = this.firstName + ' ' + val
+        }
+      },
+      // 计算属性
+      computed: {
+        fullName2(){
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+  })
+  </script>
+</body>
+</html>

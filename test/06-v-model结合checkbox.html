@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1.只有一个checkbox复选框 -->
+    <!-- 只有一个复选框的时候 当我们选中与取消时 拿到的并不是value值 而是布尔值 选中的时候返回true 取消选中的时候拿到false -->
+    <!-- 模拟一下 点击同意以后 才可以点击下一步 -->
+    <!-- <input type="checkbox" v-model="isAgree">同意
+    <h2>您选择是:{{isAgree}}</h2>
+    <button :disabled="!isAgree">下一步</button> -->
+
+    <!-- 2.有多个checkbox复选框 -->
+    <!-- 选择爱好 -->
+    <!-- <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+    <input type="checkbox" value="台球" v-model="hobbies">台球 -->
+
+    <!-- 可以使用v-for 配合 动态绑定 -->
+    <label v-for="item in hobbiesData" :for="item">
+      <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
+    </label>
+    <h2>您选择的爱好有:{{hobbies}}</h2>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        isAgree: false,
+        hobbies:[],
+        hobbiesData: ['篮球','足球','乒乓球','台球','羽毛球']
+      },
+  })
+  </script>
+</body>
+</html>

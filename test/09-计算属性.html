@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 以前的方式 -->
+    <h2>{{firstName}}{{lastName}}</h2>
+    <h2>{{firstName}}{{lastName}}</h2>
+    <h2>{{firstName}}{{lastName}}</h2>
+
+    <!-- 通过methods来处理 -->
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+
+    <!-- 通过计算属性来处理 -->
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{filterArray}}</h2>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        firstName:'Lebron',
+        lastName:'James'
+      },
+      methods: {
+        getFullName(){
+          console.log('----methods---fullName---');
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+      // 计算属性
+      computed: {
+        // 计算属性类似methods
+        // 在这里处理一些需要进行计算或是需要转换后才显示的数据
+        fullName(){
+          console.log('----computed---fullName---');
+          return this.firstName + ' ' + this.lastName
+        },
+        // 筛选数组
+        filterArray(){
+          let arr = [1,2,3,4,5,6]
+          // 筛选出大于2的值
+          return arr.filter(function (item) {
+            return item > 2
+          })
+        }
+      },
+  })
+  </script>
+</body>
+</html>

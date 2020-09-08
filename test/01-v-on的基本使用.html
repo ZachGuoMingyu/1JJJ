@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 实现一个简单的计数器案例 -->
+    <h2>{{counter}}</h2>
+    <!-- 使用v-on指令绑定事件 -->
+    <!-- v-on指令后面可以直接写一个表达式 -->
+    <!-- <button v-on:click="counter--">-1</button>
+    <button v-on:click="add">+1</button> -->
+
+    <!-- 语法糖写法 使用@代替v-on:-->
+    <!-- counter最小值为0 到0以后 就不允许再减了 -->
+    <button @click="counter--" :disabled="counter <=0">-1</button>
+    <button @click="add">+1</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        counter: 0
+      },
+      // 方法
+      methods: {
+        // 增加方法
+        add(){
+          this.counter++
+        }
+      },
+  })
+  </script>
+</body>
+</html>

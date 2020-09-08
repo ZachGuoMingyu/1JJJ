@@ -7,19 +7,16 @@
 </head>
 <body>
   <div id="app">
-    <!-- <div v-bind:style="[baseStyles, overridingStyles]"></div>
-    style后面跟的是一个数组类型
-    多个值以，分割即可 -->
-    <h2 :style="[baseStyle, fontSize]">{{message}}</h2>
+    <!-- 使用v-model指令实现input输入框双向数据绑定 -->
+    <input type="text" v-model="message">
+    <h2>输入的值为:{{message}}</h2>
   </div>
   <script src="./js/vue.js"></script>
   <script>
     let app = new Vue({
       el: '#app',
       data: {
-        message: 'Hello Vue',
-        baseStyle: {color: 'red'},
-        fontSize: {fontSize: '50px'}
+        message: ''
       },
   })
   </script>

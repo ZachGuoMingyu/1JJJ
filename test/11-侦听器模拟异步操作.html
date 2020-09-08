@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 需求 模拟验证用户名是否重复 如果重复 提示 此用户名已经存在 不重复 提示 用户名可用 -->
+  <div id="app">
+    请输入用户名:<input type="text" v-model.lazy="username">
+    {{tip}}
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        // 用户名
+        username: '',
+        // 提示
+        tip:''
+      },
+      // 使用侦听器监听username
+      watch: {
+        username(val){
+          // 模拟网络请求验证
+          setTimeout(() => {
+            if (val == 'admin') {
+              this.tip = '用户名重复，请您更换用户名！'
+            }else{
+              this.tip = '此用户名可以使用'
+            }
+          }, 2000);
+          this.tip = '正在验证...'
+        }
+      },
+  })
+  </script>
+</body>
+</html>
