@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 使用全局组件 -->
+    <global-cpn></global-cpn>
+    <local-cpn></local-cpn>
+  </div>
+  <div id="app2">
+    <global-cpn></global-cpn>
+    <local-cpn></local-cpn>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // 注册全局组件
+    // 第一个参数 自定义的组件名称
+    // 第二个参数 一个对象 类似Vue实例的参数对象 可在其内进行一些选项配置
+    Vue.component('global-cpn',{
+      // template 模板 组件的html结构
+      // 注意 组件中也只有一个根div
+      template:`
+        <div>
+          <h2>我是全局组件的标题</h2>
+          <p>我是全局组件的内容</p>
+        </div>
+      `
+    })
+    let app = new Vue({
+      el: '#app',
+      data: {},
+      // 组件
+      components:{
+        // key : value 
+        'local-cpn':{
+          template:`
+            <div>
+              <h2>我是局部组件的标题</h2>
+              <p>我是局部组件的内容</p>
+            </div>
+          `
+        }
+      }
+    })
+    let app2 = new Vue({
+      el: '#app2',
+      data: {
+
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <parent-cpn></parent-cpn>
+    
+  </div>
+
+  <!-- 创建一个父组件模板 -->
+  <template id="parentCpn">
+    <div>
+      <h2>我是父组件的标题</h2>
+      <p>我是父组件的内容</p>
+      <child-cpn></child-cpn>
+    </div>
+  </template>
+
+  <!-- 创建一个子组件的模板 -->
+  <template id="childCpn">
+    <div>
+      <h2>我是子组件的标题</h2>
+      <p>我是子组件的内容</p>
+    </div>
+  </template>
+
+  <script src="./js/vue.js"></script>
+  <script>
+    // 根组件
+    let app = new Vue({
+      el: '#app',
+      data: {},
+      components:{
+        // 父组件
+        'parent-cpn':{
+          template: '#parentCpn',
+          // 子组件
+          components:{
+            'child-cpn':{
+              template: '#childCpn'
+            }
+          }
+        }
+      }
+  })
+  </script>
+</body>
+</html>

@@ -7,17 +7,27 @@
 </head>
 <body>
   <div id="app">
-    <!-- 使用v-model指令实现input输入框双向数据绑定 -->
-    <input type="text" v-model="message">
-    <h2>输入的值为:{{message}}</h2>
+    <local-cpn></local-cpn>
   </div>
+
+  <!-- 使用模板分离写法来创建template -->
+  <template id="cpn">
+    <div>
+      <h2>我是组件的标题</h2>
+      <p>我是组件的内容</p>
+    </div>
+  </template>
+
   <script src="./js/vue.js"></script>
   <script>
     let app = new Vue({
       el: '#app',
-      data: {
-        message: ''
-      },
+      data: {},
+      components:{
+        'local-cpn':{
+          template: '#cpn'
+        }
+      }
   })
   </script>
 </body>
