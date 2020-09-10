@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div v-my-directive="message"></div>
+  </div>
+  <script src="./js/vue.js"></script>
+  <!-- 引入插件 -->
+  <script src="./vue-myPlugin.js"></script>
+  <script>
+
+    // 使用插件
+    Vue.use(MyPlugin)
+
+    // 插件的全局方法
+    Vue.myGlobalMethod()
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello plugin'
+      },
+    })
+    app.$myMethod()
+  </script>
+</body>
+</html>

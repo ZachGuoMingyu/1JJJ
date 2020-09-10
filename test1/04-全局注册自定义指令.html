@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 需求 当页面加载完毕后 让input输入框自动聚焦 -->
+  <div id="app">
+    <!-- 使用自定义指令 需要在指令名称前加上 v- -->
+    <input type="text" v-focus>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+
+    // 创建自定义指令
+    // 第一个参数-指令的名称 在定义名称的时候，前面不需要加v-前缀，但是在调用的时候，必须在指令前加上v-前缀。注意！在自定义指令中，如果以驼峰命名的方式定义，如：‘focusA‘，在HTML中使用的时候，只能通过 v-focus-a 来使用 
+    // 第二个参数 是一个对象 在这个对象上 有一些指令相关的钩子函数 这些函数 可以在特定的阶段 执行相关的操作
+    Vue.directive('focus',{
+      // 每当指令绑定到元素上的时候，会立即执行这个bind函数，只调用一次，指令第一次绑定到元素时调用, 在这里可以进行一次性的初始化设置
+      bind(){
+
+      },
+      // 被绑定元素插入父节点时(DOM)调用 (仅保证父节点存在，但不一定已被插入文档中)
+      // 聚焦元素,el为DOM中的Element元素，也就是我们把指令绑定在哪个元素上，el就是谁；注意在每个钩子函数中，第一个参数永远是el，它是一个原生JS的对象
+      inserted(el){
+        // 使绑定的元素聚焦
+        el.focus()
+      },
+      // 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前 可能会被调用多次
+      update(){
+
+      }
+    })
+
+    let app = new Vue({
+      el: '#app',
+      data: {},
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>{{message}}</h2>
+    <button @click="btnClick">click</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // 新建mixin对象
+    const myMixin = {
+      data() {
+        return {
+          message: '我是mixin中的message'  
+        }
+      },
+      // 生命周期钩子函数
+      created() {
+        console.log('我是mixin中的created钩子函数');
+      },
+      methods: {
+        btnClick(){
+          console.log('我是mixin中的click点击方法');
+        }
+      },
+    }
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+        message: '我是组件中的message' 
+      },
+      mixins: [myMixin],
+      // 生命周期钩子函数
+      created() {
+        console.log('我是组件中的created钩子函数');
+      },
+      methods: {
+        btnClick() {
+          console.log('我是组件中的click点击方法');
+        }
+      },
+    })
+  </script>
+</body>
+</html>

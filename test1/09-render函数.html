@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 以列表形式展示一个电影数组 -->
+    <movie-list :movies="movies"></movie-list>
+  </div>
+
+  <script src="./js/vue.js"></script>
+  <script>
+    // 可以使用render函数来创建组件
+    // 注册全局组件
+    Vue.component('movie-list',{
+      // 通过props获取到根组件中的movies
+      props:['movies'],
+      // 使用render函数来创建组件
+      // h 就是 createElement的简写
+      render(h) {
+        // ul li
+        let lis = []
+        // 循环创建li节点 并且插入到lis数组中
+        this.movies.forEach(function (item) {
+          // createElement('li') 创建li虚拟节点 VNode
+          let li = h('li', item)
+          lis.push(li)
+        })
+        console.log(lis);
+        // 将lis子节点插入到ul父节点中
+        let ul = h('ul', lis)
+        return ul
+      },
+    })
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+        movies: ['八佰','信条','盗梦空间']
+      },
+    })
+  </script>
+</body>
+</html>

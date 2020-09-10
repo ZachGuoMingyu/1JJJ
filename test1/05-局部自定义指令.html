@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 自定义一个指令用来设置元素的背景颜色 -->
+    <div v-bgc-color="bgcColor">我是一个div</div>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        bgcColor: 'red'
+      },
+      // 自定义指令
+      directives:{
+        // 带参数的自定义指令
+        // bind生命周期, 只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置
+        // el 为当前自定义指令的DOM元素 
+        // binding 为自定义的函数形参 通过自定义属性传递过来的值 存在 binding.value 里面
+        'bgc-color':{
+          bind(el, binding){
+            console.log(binding.value);
+            el.style.backgroundColor = binding.value
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
