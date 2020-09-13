@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .router-link-active {
+      background-color: paleturquoise;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/about">关于</router-link>
+    <!-- 本地拼接 -->
+    <!-- <router-link to="/user/123456">用户</router-link> -->
+    <!-- 网络userId拼接 -->
+    <router-link :to="'/user/'+userId">用户</router-link>
+    <router-view></router-view>
+  </div>
+
+  <!-- 首页组件 -->
+  <template id="home">
+    <div style="background-color: gainsboro;">
+      <h2>我是首页界面的标题</h2>
+      <p>我是首页界面的内容</p>
+    </div>
+  </template>
+  <!-- 关于组件 -->
+  <template id="about">
+    <div style="background-color: paleturquoise;">
+      <h2>我是关于界面的标题</h2>
+      <p>我是关于界面的内容</p>
+    </div>
+  </template>
+  <!-- 用户组件 -->
+  <template id="user">
+    <div style="background-color: pink;">
+      <h2>我是用户界面的标题</h2>
+      <p>我是用户界面的内容</p>
+      <!-- 获取动态路由传递过来的值 -->
+      <h2>动态路由传递的id：{{$route.params.userId}}</h2>
+    </div>
+  </template>
+
+  <script src="./js/vue.js"></script>
+  <!-- 引入VueRouter的cdn -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.3/vue-router.min.js"></script>
+  <script>
+    const router = new VueRouter({
+      routes: [
+        {
+          path: '/',
+          redirect: '/home'
+        },
+        {
+          path: '/home',
+          component: {
+            template: '#home'
+          },
+          name: 'home',
+        },
+        {
+          path: '/about',
+          component: {
+            template: '#about'
+          },
+          name: 'about'
+        },
+        // 用户界面
+        {
+          // 设置动态路由
+          path: '/user/:userId',
+          component:{
+            template: '#user'
+          }
+        }
+
+      ]
+    })
+    let app = new Vue({
+      el: '#app',
+      data: {
+        userId: '123456'
+      },
+      // 注册路由
+      router,
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .router-link-active{
+      background-color: paleturquoise;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- router-link,是vueRouter中内置的组件,可以在全局进行使用,可以控制路由跳转 -->
+    <router-link to="/home">首页</router-link>
+    <router-link to="/about">关于</router-link>
+    <!-- router- view是vuerouter的内置组件,可以在全局使用,决定我们渲染出来的home和about组件的内容显示在什么位置 -->
+    <!-- router- view放在哪,我们的路由就在哪显示 -->
+    <router-view></router-view>
+  </div>
+
+  <!-- 首页组件 -->
+  <template id="home">
+    <div style="background-color: gainsboro;">
+      <h2>我是首页界面的标题</h2>
+      <p>我是首页界面的内容</p>
+    </div>
+  </template>
+  <!-- 关于组件 -->
+  <template id="about">
+    <div style="background-color: paleturquoise;">
+      <h2>我是关于界面的标题</h2>
+      <p>我是关于界面的内容</p>
+    </div>
+  </template>
+
+  <script src="./js/vue.js"></script>
+  <!-- 引入VueRouter的cdn -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.3/vue-router.min.js"></script>
+  <script>
+    // 使用VueRouter构造函数创建VueRouter实例
+    const router = new VueRouter({
+      // router中最重要的,就是routes属性,配置路由与组件之间的映射关系,将我们配置好的关系放到router实例中
+      routes: [
+        // 可以路由的重定向,设置默认显示的页面
+        {
+          path: '/',
+          redirect: '/home'
+        },
+        // 一个映射关系就是一个对象 我们要通过路由的路径跟我们组件进行映射 路径切换时要显示对应的组件
+        // path 配置路由的路径 vue会自动的拼接路径到项目运行地址的url后面
+	      // component 配置对应的组件
+        // 首页
+        {
+          path: '/home',
+          component:{
+            template: '#home'
+          },
+          // 命名路由
+          name: 'home',
+          // 路由重定向
+          // redirect: '/about'
+          // 路由别名
+          // alias: '/about'
+        },
+        // 关于
+        {
+          path: '/about',
+          component:{
+            template: '#about'
+          },
+          name: 'about'
+        }
+      ]
+    })
+    let app = new Vue({
+      el: '#app',
+      data: {},
+      // 注册路由
+      router,
+    })
+  </script>
+</body>
+</html>

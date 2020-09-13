@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首页</title>
+  <style>
+    .router-link-active {
+      background-color: paleturquoise;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用编程式导航控制路由跳转 -->
+    <button @click="toHome">首页</button>
+    <button @click="toAbout">关于</button>
+    <button @click="toUser">用户</button>
+    <router-view></router-view>
+  </div>
+
+  <!-- 首页组件 -->
+  <template id="home">
+    <div style="background-color: gainsboro;">
+      <h2>我是首页界面的标题</h2>
+      <p>我是首页界面的内容</p>
+      <router-link to="/home/news">新闻</router-link>
+      <router-link to="/home/messages">消息</router-link>
+      <router-view></router-view>
+    </div>
+  </template>
+  <!-- 首页中的子组件-新闻组件 -->
+  <template id="news">
+    <div style="background-color: greenyellow;">
+      <h2>我是新闻界面的标题</h2>
+      <ul>
+        <li>新闻1</li>
+        <li>新闻2</li>
+        <li>新闻3</li>
+        <li>新闻4</li>
+      </ul>
+    </div>
+  </template>
+  <!-- 首页中的子组件-消息组件 -->
+  <template id="messages">
+    <div style="background-color: ivory;">
+      <h2>我是消息界面的标题</h2>
+      <ul>
+        <li>消息1</li>
+        <li>消息2</li>
+        <li>消息3</li>
+        <li>消息4</li>
+      </ul>
+    </div>
+  </template>
+  <!-- 关于组件 -->
+  <template id="about">
+    <div style="background-color: paleturquoise;">
+      <h2>我是关于界面的标题</h2>
+      <p>我是关于界面的内容</p>
+      <!-- 接收命名路由结合params传递的值 -->
+      <!-- <h2>命名路由结合params:{{$route.params.name}}</h2> -->
+
+      <!-- 接收query传递过来的值 -->
+      <h2>query传递的值:{{$route.query.age}}</h2>
+    </div>
+  </template>
+  <!-- 用户组件 -->
+  <template id="user">
+    <div style="background-color: pink;">
+      <h2>我是用户界面的标题</h2>
+      <p>我是用户界面的内容</p>
+    </div>
+  </template>
+
+  <script src="./js/vue.js"></script>
+  <!-- 引入VueRouter的cdn -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.3/vue-router.min.js"></script>
+  <script>
+    const router = new VueRouter({
+      routes: [
+        {
+          path: '/',
+          redirect: '/home'
+        },
+        {
+          path: '/home',
+          component: {
+            template: '#home'
+          },
+          name: 'home',
+          // 设置元数据
+          meta:{
+            title:'首页'
+          },
+          // 配置子路由 使用children属性
+          // 子路由要在自己的组件内部进行配置
+          children: [
+            // 子路由中也可以设置默认显示的界面
+            {
+              path: '/',
+              redirect: 'news'
+            },
+            // 子路由的配置有正常的路由配置一样
+            // 新闻
+            {
+              // 子路由的路径前不需要加 / 会帮助我们自动生成
+              path: 'news',
+              component: {
+                template: '#news'
+              }
+            },
+            // 消息
+            {
+              path: 'messages',
+              component: {
+                template: '#messages'
+              }
+            }
+          ]
+        },
+        {
+          path: '/about',
+          component: {
+            template: '#about'
+          },
+          name: 'about',
+          // 设置元数据
+          meta: {
+            title: '关于'
+          },
+        },
+        {
+          path: '/user/:userId',
+          component: {
+            template: '#user'
+          },
+          // 设置元数据
+          meta: {
+            title: '用户'
+          },
+        }
+
+      ],
+      // 修改路由模式 默认是hash模式
+      // mode: 'history'
+    })
+    // push
+    const originalPush = VueRouter.prototype.push
+    VueRouter.prototype.push = function push(location) {
+      return originalPush.call(this, location).catch(err => err)
+    }
+
+    // 路由的导航守卫
+    // 前置导航守卫
+    router.beforeEach( (to, from, next) => {
+
+      console.log(from, to);
+      // 设置标题动态变化
+      document.title = to.matched[0].meta.title
+      // 只有我们队导航守卫进行控制 必须要执行next()方法 不配置导航守卫 默认执行此方法
+      next()
+    } )
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+        userId: '123456'
+      },
+      // 注册路由
+      router,
+      methods: {
+        // 跳转到首页
+        toHome() {
+          // this.$router.push('/home')
+          this.$router.push({ path: '/home' })
+          // this.$router.replace('/home')
+        },
+        // 跳转到关于
+        toAbout() {
+          // this.$router.push('/about')
+          // 命名路由结合params进行传值
+          // this.$router.push({
+          //   name: 'about',
+          //   params:{name:'About'}
+          // })
+
+          // 通过query传值 如果参数对象中是path， params 不生效，只能通过query来传递
+          this.$router.push({
+            path: '/about',
+            query: { age: 18 }
+          })
+        },
+        // 跳转到用户
+        toUser() {
+          this.$router.push('/user/' + this.userId)
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
