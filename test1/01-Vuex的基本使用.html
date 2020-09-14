@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 存放在Vuex state中的状态 我们如何获取呢？ -->
+    <!-- 通过插值语法显示 使用$store  -->
+    <h2>state中存放的count:{{$store.state.count}}</h2>
+    <!-- 通过计算属性获取state中的count -->
+    <h2>通过计算属性获取:{{countComputed}}</h2>
+    <!-- 通过辅助函数获取state中的count -->
+    <h2>通过辅助函数获取:{{count}}</h2>
+
+    <!-- 实现一个简单的计数器 -->
+    <!-- 注意 官方不推荐在Vue组件中直接去修改state中的值 -->
+    <!-- <button @click="$store.state.count++">+1</button>
+    <button @click="$store.state.count--">-1</button> -->
+
+    <button @click="addCount">+1</button>
+    <button @click="subCount">-1</button>
+
+    <h2>------------------------cpn----------------------------</h2>
+    <cpn></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>我是子组件的标题</h2>
+      <!-- 在其他组件中想要共享Vuex中的状态 直接调用即可 -->
+      <h2>Vuex中state中的count:{{$store.state.count}}</h2>
+    </div>
+  </template>
+
+  <script src="./js/vue.js"></script>
+  <!-- 引入Vuex的cdn -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js"></script>
+  <script>
+
+    // 创建store实例对象对象 这里并不是创建一个Vuex实例 而是调用Vuex的一个属性 Store
+    const store = new Vuex.Store({
+      // state是保存状态的 状态包含我们要用到的变量，对象，数组。。。 放在这里的属性就是我们要共享的状态 这里的属性我们可以通过Vuex在全局范围内的组件都可以使用 类似于Vue实例中的data
+      state:{
+        count: 0
+      },
+      //状态更新 通过mutations来对state中的属性的状态进行更新 是官方推荐的唯一更新状态的方式 但是不要在其内部执行异步操作
+      mutations:{
+        // 定义在mutations中的方法 Vuex会默认为我们提供一个参数 state 这个state就是我们上面定义的state 可以通过它来拿到存放在state中的属性
+        add(state){
+          state.count++
+        },
+        sub(state){
+          state.count--
+        }
+      }
+    })
+
+    let app = new Vue({
+      el: '#app',
+      data: {},
+      components:{
+        cpn:{
+          template: '#cpn'
+        }
+      },
+      // 注册使用Vuex
+      store,
+      computed: {
+
+        // 辅助函数 state的辅助函数声明在计算属性内 可以直接使用
+        ...Vuex.mapState(['count']),
+        // 通过计算属性获取state中的数据
+        countComputed(){
+          return this.$store.state.count
+        }
+
+      },
+      methods: {
+        addCount(){
+          // 通过this.$store.commit('mutations中的方法') 方法名一定要和mutations中定义的名字保持一致
+          this.$store.commit('add')
+        },
+        subCount(){
+          this.$store.commit('sub')
+        }
+      },
+    })
+  </script>
+</body>
+</html>
