@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  查询所有栏目信息 | get | 无参 | http://47.106.244.1:8099/manager/category/findAllCategory
+  <br>
+  通过栏目名查询栏目信息 | get | name string(体育) | http://47.106.244.1:8099/manager/category/findCategoryByCategoryname
+  <br>
+  查询订单信息 | post | name object | http://134.175.100.63:5588/order/queryPage?page=0&pageSize=10
+  <br>
+  退出 | post | 无参 | http://47.106.244.1:8099/manager/user/logout
+  <!-- 引入axios的cdn -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0/axios.min.js"></script>
+  <script>
+    // axios全局配置
+    // 设置全局属性baseURL
+    axios.defaults.baseURL = 'http://47.106.244.1:8099/manager'
+
+    // 设置超时时间
+    axios.defaults.timeout = 5000
+
+    axios.get('category/findAllCategory')
+    .then(r => {
+      console.log(r)
+    })
+  </script>
+</body>
+
+</html>
