@@ -65,6 +65,14 @@ export const constantRoutes = [
         name: 'customer',
         component: () => import('@/pages/customer/index'),
         meta: { title: '顾客管理', icon: 'peo' }
+      },
+      // 顾客详情
+      {
+        path: 'customerDetail',
+        name: 'customerDetail',
+        hidden: true,
+        component: () => import('@/pages/customer/customerDetail'),
+        meta: { title: '顾客详情', icon: 'peo' }
       }
     ]
   },

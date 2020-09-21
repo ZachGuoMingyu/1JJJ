@@ -18,6 +18,13 @@ import 'font-awesome/css/font-awesome.css'
 
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+// 导入过滤器
+import * as filters from './filters'
+
+// 过滤器配置 全局使用
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 Vue.use(mavonEditor)
 /**
  * If you don't want to use mock-server
@@ -33,7 +40,7 @@ Vue.use(mavonEditor)
 // }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale, size: 'small' })
+Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 
