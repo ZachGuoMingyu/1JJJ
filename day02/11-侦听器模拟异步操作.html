@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 需求 验证用户名 如果用户名重名 提示 当前用户名已存在,请更换! 如果不重复 提示 可以使用 -->
+  <div id="app">
+    请输入用户名：<input type="text" v-model.lazy="username">
+    {{tip}}
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        username: '',
+        tip: ''
+      },
+      // 侦听器
+      watch: {
+        username(val){
+          this.tip = '正在验证...'
+          // 使用延时函数模拟异步操作
+          setTimeout(() => {
+            if (val == 'admin') {
+              this.tip = '当前用户名已存在,请更换用户名!'
+            }else{
+              this.tip = '当前用户名可以使用!'
+            }
+          }, 2000);
+        }
+      },
+  })
+  </script>
+</body>
+</html>

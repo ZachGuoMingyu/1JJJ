@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- v-on 参数的问题 -->
+    <!-- 情况一:如果该方法不需要额外参数，那么方法后的()可以不添加 -->
+    <button @click="btn1Click()">按钮一</button>
+
+    <!-- 传递参数的时候 -->
+    <!-- <button @click="btn2Click('我是按钮二', '第二个参数')">按钮二</button> -->
+    <button @click="btn2Click()">按钮二</button>
+
+    <!-- 但是注意:如果方法本身中有一个参数，那么会默认将原生事件event参数传递进去 -->
+    <button @click="btn3Click">按钮三</button>
+
+    <!-- 情况二:如果需要同时传入某个参数，同时需要event时，可以通过$event传入事件。 -->
+    <button @click="btn4Click('我是按钮四', event)">按钮四</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        // 没有参数传递
+        btn1Click(){
+          console.log('按钮一被点击了');
+        },
+        // 有参数传递
+        btn2Click(arg, arg2){
+          console.log('按钮二被点击了', arg, arg2);
+        },
+        // 原生event参数
+        btn3Click(event){
+          console.log('按钮三被点击了', event);
+        },
+        // 同时需要参数和event
+        btn4Click(arg, event){
+          console.log('按钮四被点击了', arg, event);
+        }
+      },
+  })
+  </script>
+</body>
+</html>
