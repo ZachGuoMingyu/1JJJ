@@ -66,10 +66,11 @@ export const constantRoutes = [
         component: () => import('@/pages/customer/index'),
         meta: { title: '顾客管理', icon: 'peo' }
       },
-      // 顾客详情
+      // 顾客详情页面
       {
         path: 'customerDetail',
         name: 'customerDetail',
+        // 在侧边栏隐藏
         hidden: true,
         component: () => import('@/pages/customer/customerDetail'),
         meta: { title: '顾客详情', icon: 'peo' }
@@ -166,6 +167,7 @@ export const constantRoutes = [
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
+  mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
