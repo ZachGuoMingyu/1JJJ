@@ -1,0 +1,5 @@
+<!-- 父组件通过属性的方式给子组件传递参数 -->
+<my-header inner-text="首页头部" name="{{name}}" bind:changeName="changeName">
+  <!-- 插槽 要在原有组件的基础上 添加一些不确定的结构 -->
+  <view>我是首页新增的结构</view>
+</my-header>

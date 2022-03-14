@@ -1,0 +1,8 @@
+<!--components/myHeader.wxml-->
+<view class="inner">
+  {{innerText}}
+  <slot></slot>
+  <button type="primary" bindtap="changeName">{{name}}</button>
+</view>
+
+
