@@ -1,0 +1,8 @@
+<!--pages/about/about.wxml-->
+<view>我是关于页面</view>
+<!-- 返回上一页 -->
+<!-- <navigator open-type="navigateBack">返回上一页</navigator> -->
+
+<!-- 编程式导航 -->
+<button bindtap="toBack">返回</button>
+

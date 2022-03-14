@@ -1,0 +1,6 @@
+/* pages/about/about.wxss */
+view{
+  color: red;
+  font-size: 50rpx;
+  text-align: center;
+}

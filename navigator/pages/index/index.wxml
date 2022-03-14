@@ -1,0 +1,17 @@
+<!-- navigator组件 跳转页面 -->
+<!-- 使用对应的组件 进行页面的跳转 -->
+<!-- open-type  决定你要跳转页面的方式 -->
+<!-- navigate 跳转到非tabbar页面的时候使用 -->
+<!-- url的路径不需要补全 -->
+<!-- 局限性 
+  1.样式需要我们自己设置 
+  2.一些需要js代码处理的逻辑不太好操作
+  -->
+<!-- <navigator open-type="navigate" url="/pages/about/about">跳转到关于页面</navigator> -->
+
+<!-- 编程式导航 -->
+<button type="primary" bindtap="toAboutPage">跳转到关于页面</button>
+
+<audio src="/statics/橘子海-有暖气.mp3" controls></audio>
+
+<video src="http://47.100.84.201/video/WonderfulTools-Apple.mp4" controls></video>
