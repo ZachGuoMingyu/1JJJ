@@ -1,6 +1,0 @@
-/* components/myHeader.wxss */
-.inner{
-  color: red;
-  text-align: center;
-  font-size: 30px;
-}

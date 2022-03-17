@@ -11,12 +11,15 @@
     <input type="text" v-model="cityName">
     <button @click="searchCityWeather">查询</button>
     <div>当前城市气温为:</div>
+    
   </div>
 </template>
 
 <script>
 // 导入axios
 import axios from "axios";
+// 导入封装的axios方法
+import {get, post} from '@/http/axios'
 import qs from 'qs'
 export default {
   data() {
@@ -53,6 +56,7 @@ export default {
         url:'https://api.muxiaoguo.cn/api/tianqi',
         // 默认请求为get方式 
         method:'post',
+        // 先使用params 和 data试一下
         data:qs.stringify({
           api_key:'779d7e46708290a5',
           city: this.cityName,
@@ -64,7 +68,8 @@ export default {
       }).then(res => {
         console.log(res.data.data.temp);
       })
-    }
+    },
+    // 查询垃圾分类 - 使用封装的post
   },
 };
 </script>
