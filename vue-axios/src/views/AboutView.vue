@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: ZachGmy
+ * @Date: 2022-03-14 16:12:49
+ * @LastEditors: ZachGmy
+ * @LastEditTime: 2022-03-21 16:02:15
+-->
 <template>
   <div>
     <!-- 输入垃圾名称 点击查询按钮 查询并且弹出提示 -->
@@ -28,7 +35,7 @@ export default {
         api_key:'cc83785552bf0604',
         m: this.rubName,
       }
-      let res = await post('/lajifl', data)
+      let res = await get('/lajifl', data)
       console.log(res);
       Dialog.alert({
         title: '您查询的垃圾种类是',
