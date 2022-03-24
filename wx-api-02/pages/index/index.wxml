@@ -1,0 +1,8 @@
+<!-- api -->
+<button type="primary" bindtap="searchAPI">API</button>
+<!-- 位置Api -->
+<button type="primary" bindtap="mapAPI">位置API</button>
+<!-- switchTab跳转传值 -->
+<button type="primary" bindtap="switchToAbout">跳转到关于</button>
+<!-- 保存图片到系统相册 推荐使用show-menu-by-longpress -->
+<image src="https://t7.baidu.com/it/u=4162611394,4275913936&fm=193&f=GIF" show-menu-by-longpress="{{true}}" bindtap="savePhotosAlbum"></image>
